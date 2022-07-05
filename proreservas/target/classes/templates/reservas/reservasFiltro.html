@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Salas Disponíveis</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<header th:insert="fragments/geral.html :: header"></header>
+	<div class="container my-2">
+		<h1>Salas Disponíveis</h1>
+		<form method="GET" th:action="@{/reservas/reservasFiltro}" th:object="${sala}">
+		<input type="data" name="data" class="form-control" placeholder="Buscar Por Data - Exemplo: 26/06/2022">
+		<br>
+		<input type="text" name="bloco" class="form-control" placeholder="Buscar Por Bloco - Exemplo: C">
+		<br>
+		<input type="text" name="codigoSala" class="form-control" placeholder="Buscar Por Código de Sala - Exemplo: C102">
+		<br>
+		<button type="hidden" class="btn btn-outline-danger btn-block">Buscar</button>
+		</form>
+		<br>
+		
+		<table border="1" class="table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>Bloco</th>
+					<th>Código Sala</th>
+					<th>Descrição Sala</th>
+					<th>Data Disponível</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="sala : ${listaSalas}">
+					<td th:text="${sala.bloco}"></td>
+					<td th:text="${sala.codigoSala}"></td>
+					<td th:text="${sala.descricaoSala}"></td>
+					<td th:text="${sala.data}"></td>
+					<td>
+					<a th:href="@{/reservas/reservar/{id}(id=${sala.id})}" class="btn btn-danger">Reservar</a>							
+					<a th:href="@{/reservas/reservarMes/{id}(id=${sala.id})}" class="btn btn-danger">Reservar Mês</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

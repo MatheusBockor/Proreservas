@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Gerenciamento de Salas</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<header th:insert="fragments/geral.html :: header"></header>
+	<div class="container my-2">
+		<a th:href="@{/organizacao/salas/form}" class="btn btn-outline-danger">Incluir Sala</a>
+		<h1>Salas</h1>
+		<table border="1" class="table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>Bloco</th>
+					<th>Código Sala</th>
+					<th>Descrição Sala</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="sala : ${listaSalas}">
+					<td th:text="${sala.bloco}"></td>
+					<td th:text="${sala.codigoSala}"></td>
+					<td th:text="${sala.descricaoSala}"></td>
+					<td> 
+					<a th:href="@{/organizacao/salas/{id}(id=${sala.id})}" class="btn btn-primary">Alterar</a>
+					<a th:href="@{/organizacao/salas/excluir/{id}(id=${sala.id})}" class="btn btn-danger">Excluir</a>			
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de Salas</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+</head>
+<body>
+	<header th:insert="fragments/geral.html :: header"></header>
+	<div class="container my-2">
+		<h1>Cadastro de Salas</h1>
+		<hr>
+		<h2>Editar Sala</h2>
+		<form action="#" th:action="@{/organizacao/salas/salvar}" th:object="${sala}" method="POST">
+			<input type="hidden" id="id" th:field="*{id}">
+			<input type="text" th:field="*{bloco}" placeholder="Bloco" class="form-control mb-4 col-4">
+      		<input type="text" th:field="*{codigoSala}" placeholder="Código Sala" class="form-control mb-4 col-4">
+      		<input type="text" th:field="*{descricaoSala}" placeholder="Descrição Sala" class="form-control mb-4 col-4">
+
+			<button type="submit" class="btn btn-outline-danger">Salvar</button>
+		</form>
+		<hr>
+		<a th:href="@{/organizacao/salas}">Retornar para a Lista de Salas</a>
+	</div>
+</body>
+</html>
